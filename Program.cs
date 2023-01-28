@@ -9,6 +9,14 @@ namespace TheFinalBattle
 
         }
 
+        public class Heroes : Party
+        {
+        }
+
+        public class Monsters : Party
+        {
+        }
+
         public class Party
         {
             public List<Character> Characters { get; private set; }
