@@ -6,7 +6,50 @@ namespace TheFinalBattle
     {
         static void Main(string[] args)
         {
+            Skeleton skeleton1 = new Skeleton();
+            Skeleton skeleton2 = new Skeleton();
 
+            GameManager gameManager = new GameManager();
+
+            gameManager.Heroes.Add(skeleton1);
+            gameManager.Monsters.Add(skeleton2);
+
+            gameManager.Start();
+        }
+
+        public class GameManager
+        {
+            public Heroes Heroes { get; set; }
+            public Monsters Monsters { get; set; }
+
+            public GameManager()
+            {
+                Heroes = new Heroes();
+                Monsters = new Monsters();
+            }
+
+            private void CharacterTurn(Character character)
+            {
+                Console.WriteLine($"It's {character.Name}'s turn...");
+                character.Action();
+                Console.WriteLine("");
+            }
+
+            public void Start()
+            {
+                while (true)
+                {
+                    for (int i = 0; i < Heroes.Characters.Count; i++)
+                    {
+                        CharacterTurn(Heroes.Characters[i]);
+                    }
+
+                    for (int i = 0; i < Monsters.Characters.Count; i++)
+                    {
+                        CharacterTurn(Monsters.Characters[i]);
+                    }
+                }
+            }
         }
 
         public class Heroes : Party
