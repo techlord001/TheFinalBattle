@@ -6,13 +6,11 @@ namespace TheFinalBattle
     {
         static void Main(string[] args)
         {
-            Skeleton skeleton1 = new Skeleton();
-            Skeleton skeleton2 = new Skeleton();
+            Skeleton skeleton = new Skeleton();
 
             GameManager gameManager = new GameManager();
 
-            gameManager.Heroes.Add(skeleton1);
-            gameManager.Monsters.Add(skeleton2);
+            gameManager.Monsters.Add(skeleton);
 
             gameManager.Start();
         }
@@ -26,6 +24,8 @@ namespace TheFinalBattle
             {
                 Heroes = new Heroes();
                 Monsters = new Monsters();
+
+                Heroes.AddTrueProgrammer();
             }
 
             private void CharacterTurn(Character character)
@@ -54,6 +54,12 @@ namespace TheFinalBattle
 
         public class Heroes : Party
         {
+            public void AddTrueProgrammer()
+            {
+                TrueProgrammer trueProgrammer = new TrueProgrammer();
+                trueProgrammer.Rename();
+                this.Add(trueProgrammer);
+            }
         }
 
         public class Monsters : Party
@@ -75,6 +81,19 @@ namespace TheFinalBattle
                 {
                     Characters.Add(character);
                 }
+            }
+        }
+
+        public class TrueProgrammer : Character
+        {
+            public TrueProgrammer() : base("True Programmer")
+            {
+            }
+
+            public void Rename()
+            {
+                Console.WriteLine("What is your name True Programmer? ");
+                Name = Console.ReadLine() ?? "";
             }
         }
 
