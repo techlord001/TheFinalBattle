@@ -23,6 +23,7 @@ public class GameManager
             "N" => Player.Computer,
             _ => Player.Computer
         };
+
         Console.WriteLine("Are the Monsters human-controlled? Y or N");
         Monsters.Player = Console.ReadLine() switch
         {
@@ -36,10 +37,10 @@ public class GameManager
         Monsters.Add(new Skeleton());
     }
 
-    private void CharacterTurn(CharacterBase character)
+    private void CharacterTurn(CharacterBase character, Player player)
     {
         Console.WriteLine($"It's {character.Name}'s turn...");
-        character.Action();
+        character.Action(player);
         Console.WriteLine("");
     }
 
@@ -49,12 +50,12 @@ public class GameManager
         {
             for (int i = 0; i < Heroes.Characters.Count; i++)
             {
-                CharacterTurn(Heroes.Characters[i]);
+                CharacterTurn(Heroes.Characters[i], Heroes.Player);
             }
 
             for (int i = 0; i < Monsters.Characters.Count; i++)
             {
-                CharacterTurn(Monsters.Characters[i]);
+                CharacterTurn(Monsters.Characters[i], Monsters.Player);
             }
         }
     }
