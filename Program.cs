@@ -1,5 +1,4 @@
-﻿using Player;
-using System;
+﻿using System;
 
 namespace TheFinalBattle
 {
@@ -7,11 +6,7 @@ namespace TheFinalBattle
     {
         static void Main(string[] args)
         {
-            Skeleton skeleton = new Skeleton();
-
             GameManager gameManager = new GameManager();
-
-            gameManager.Monsters.Add(skeleton);
 
             gameManager.Start();
         }

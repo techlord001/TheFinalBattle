@@ -1,10 +1,10 @@
-﻿namespace Player
+﻿namespace TheFinalBattle.Class.Character
 {
-    public abstract class Character
+    public abstract class CharacterBase
     {
         public string Name { get; set; }
 
-        public Character(string name)
+        public CharacterBase(string name)
         {
             Name = name;
         }
@@ -14,5 +14,9 @@
             Console.WriteLine($"{Name} did NOTHING");
             Thread.Sleep(500);
         }
+        //enum Action
+        //{
+        //    Nothing
+        //}
     }
 }
