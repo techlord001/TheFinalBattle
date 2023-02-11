@@ -6,30 +6,29 @@ public class GameManager
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
 
+    private Round NewRound { get; set; }
+
     public GameManager()
     {
         Heroes = new Heroes();
         Monsters = new Monsters();
 
-        PartyCreation();
+        GameSetup();
     }
 
-    private void PartyCreation()
+    private void GameSetup()
     {
-        Console.WriteLine("Are the Heroes human-controlled? Y or N");
-        Heroes.Player = Console.ReadLine() switch
-        {
-            "Y" => Player.Human,
-            "N" => Player.Computer,
-            _ => Player.Computer
-        };
+        Console.WriteLine("Select your game: ");
+        Console.WriteLine("1 - P1 vs AI");
+        Console.WriteLine("2 - P1 vs P2");
+        Console.WriteLine("3 - AI vs AI");
 
-        Console.WriteLine("Are the Monsters human-controlled? Y or N");
-        Monsters.Player = Console.ReadLine() switch
+        (Heroes.Player, Monsters.Player) = Console.ReadLine() switch
         {
-            "Y" => Player.Human,
-            "N" => Player.Computer,
-            _ => Player.Computer
+            "1" => (Player.Human, Player.Computer),
+            "2" => (Player.Human, Player.Human),
+            "3" => (Player.Computer, Player.Computer),
+            _ => (Player.Computer, Player.Computer)
         };
 
         Heroes.AddTrueProgrammer();
@@ -37,26 +36,10 @@ public class GameManager
         Monsters.Add(new Skeleton());
     }
 
-    private void CharacterTurn(CharacterBase character, Player player)
-    {
-        Console.WriteLine($"It's {character.Name}'s turn...");
-        character.Action(player);
-        Console.WriteLine("");
-    }
-
     public void Start()
     {
-        while (true)
-        {
-            for (int i = 0; i < Heroes.Characters.Count; i++)
-            {
-                CharacterTurn(Heroes.Characters[i], Heroes.Player);
-            }
+        NewRound = new Round(Heroes, Monsters);
 
-            for (int i = 0; i < Monsters.Characters.Count; i++)
-            {
-                CharacterTurn(Monsters.Characters[i], Monsters.Player);
-            }
-        }
+        NewRound.Start();
     }
 }
