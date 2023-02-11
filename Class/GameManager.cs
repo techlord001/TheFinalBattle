@@ -8,6 +8,9 @@ public class GameManager
 
     private Battle? NewBattle { get; set; }
 
+    private int totalRounds = 2;
+    private int currentRound = 0;
+
     public GameManager()
     {
         Heroes = new Heroes();
@@ -32,14 +35,48 @@ public class GameManager
         };
 
         Heroes.AddTrueProgrammer();
+    }
 
-        Monsters.Add(new Skeleton());
+    private bool End()
+    {
+        if (Heroes.Characters.Count == 0)
+        {
+            Console.WriteLine("All the heroes have been defeated. All hope is lost! The Uncoded One & his forces have prevailed!");
+            return true;
+        }
+
+        if (Monsters.Characters.Count == 0 && currentRound == totalRounds)
+        {
+            Console.WriteLine($"The Uncoded One and his minions have been defeated! You, {Heroes.Characters[0].Name.ToUpper()} have won the day and saved these realms! You are the True Programmer of legend!");
+            return true;
+        }
+
+        return false;
     }
 
     public void Start()
     {
-        NewBattle = new Battle(Heroes, Monsters);
+        for (int i = 0; i < totalRounds; i++)
+        {
+            currentRound++;
 
-        NewBattle.Start();
+            for (int j = 0; j < currentRound; j++)
+            {
+                Monsters.Add(new Skeleton());
+            }
+
+            NewBattle = new Battle(Heroes, Monsters);
+
+            if (!NewBattle.Start())
+            {
+                if (End())
+                {
+                    break;
+                }
+
+                continue;
+            }
+        }
+
     }
 }

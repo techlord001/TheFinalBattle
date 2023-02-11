@@ -5,7 +5,7 @@ public class Battle
 {
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
-    private bool BattleOngoing { get; set; } = true;
+    private bool BattleOver { get; set; } = false;
 
     public Battle(Heroes heroes, Monsters monsters)
     {
@@ -15,13 +15,29 @@ public class Battle
 
     private void EnemyHealthCheck(PartyBase party)
     {
-        foreach (CharacterBase character in party.Characters)
+        // TODO : Look at adding lock for potential fix for this code
+        // ERROR : System.InvalidOperationException: 'Collection was modified; enumeration operation may not execute.'
+        //foreach (CharacterBase character in party.Characters)
+        //{
+        //    if (character.CurrentHP == 0)
+        //    {
+        //        Console.WriteLine($"{character.Name.ToUpper()} has been defeated!");
+        //        party.Characters.Remove(character);
+
+        //        if (party.Characters.Count == 0)
+        //        {
+        //            break;
+        //        }
+        //    }
+        //}
+
+        for (int i = 0; i < party.Characters.Count; i++)
         {
-            if (character.CurrentHP == 0)
+            if (party.Characters[i]
+                .CurrentHP == 0)
             {
-                Console.WriteLine($"{character.Name.ToUpper()} has been defeated!");
-                party.Characters.Remove(character);
-                break;
+                Console.WriteLine($"{party.Characters[i].Name.ToUpper()} has been defeated!");
+                party.Characters.Remove(party.Characters[i]);
             }
         }
     }
@@ -33,26 +49,14 @@ public class Battle
         Console.WriteLine("");
     }
 
-    public bool End()
+    public bool End() => Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0 ? true : false;
+
+    public bool Start()
     {
-        if (Heroes.Characters.Count == 0)
-        {
-            Console.WriteLine("All the heroes have been defeated. All hope is lost! The Uncoded One & his forces have prevailed!");
-            return false;
-        }
+        Console.WriteLine("A new battle begins! Prepare yourself...");
+        Thread.Sleep(1000);
 
-        if (Monsters.Characters.Count == 0)
-        {
-            Console.WriteLine($"The Uncoded One and his minions have been defeated! You, {Heroes.Characters[0].Name.ToUpper()} have won the day and saved these realms! You are the True Programmer of legend!");
-            return false;
-        }
-
-        return true;
-    }
-
-    public void Start()
-    {
-        while (BattleOngoing)
+        while (!BattleOver)
         {
             for (int i = 0; i < Heroes.Characters.Count; i++)
             {
@@ -66,7 +70,9 @@ public class Battle
                 EnemyHealthCheck(Heroes);
             }
 
-            BattleOngoing = End();
+            BattleOver = End();
         }
+
+        return false;
     }
 }
