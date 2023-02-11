@@ -19,6 +19,18 @@ namespace TheFinalBattle.Class.Party
                 Characters.Add(character);
             }
         }
+
+        public CharacterBase Selection()
+        {
+            Console.WriteLine("Select which enemy you'd to attack: ");
+
+            for (int i = 0; i < Characters.Count; i++)
+            {
+                Console.WriteLine($"{i + 1} - {Characters[i].Name.ToUpper()}");
+            }
+
+            return Characters[Convert.ToInt32(Console.ReadLine()) - 1];
+        }
     }
 
     public enum Player

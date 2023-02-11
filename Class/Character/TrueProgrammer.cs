@@ -2,7 +2,7 @@
 
 public class TrueProgrammer : CharacterBase
 {
-    public TrueProgrammer() : base("True Programmer")
+    public TrueProgrammer() : base("True Programmer", "Punch")
     {
     }
 

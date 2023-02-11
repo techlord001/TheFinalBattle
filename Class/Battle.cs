@@ -12,10 +12,10 @@ public class Battle
         Monsters = monsters;
     }
 
-    private void CharacterTurn(CharacterBase character, Player player)
+    private void CharacterTurn(CharacterBase character, Player player, PartyBase enemyParty)
     {
-        Console.WriteLine($"It's {character.Name}'s turn...");
-        character.Action(player);
+        Console.WriteLine($"It's {character.Name.ToUpper()}'s turn...");
+        character.PlayerAction(player, enemyParty);
         Console.WriteLine("");
     }
 
@@ -25,12 +25,12 @@ public class Battle
         {
             for (int i = 0; i < Heroes.Characters.Count; i++)
             {
-                CharacterTurn(Heroes.Characters[i], Heroes.Player);
+                CharacterTurn(Heroes.Characters[i], Heroes.Player, Monsters);
             }
 
             for (int i = 0; i < Monsters.Characters.Count; i++)
             {
-                CharacterTurn(Monsters.Characters[i], Monsters.Player);
+                CharacterTurn(Monsters.Characters[i], Monsters.Player, Heroes);
             }
         }
     }

@@ -2,7 +2,7 @@
 
 public class Skeleton : CharacterBase
 {
-    public Skeleton() : base("SKELETON")
+    public Skeleton() : base("Skeleton", "Bone Crunch")
     {
     }
 }

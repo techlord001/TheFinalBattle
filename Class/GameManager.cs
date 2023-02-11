@@ -6,7 +6,7 @@ public class GameManager
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
 
-    private Battle NewBattle { get; set; }
+    private Battle? NewBattle { get; set; }
 
     public GameManager()
     {
