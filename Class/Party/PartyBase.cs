@@ -22,7 +22,7 @@ namespace TheFinalBattle.Class.Party
 
         public CharacterBase Selection()
         {
-            Console.WriteLine("Select which enemy you'd to attack: ");
+            Console.WriteLine("Select which enemy you'd like to attack: ");
 
             for (int i = 0; i < Characters.Count; i++)
             {
