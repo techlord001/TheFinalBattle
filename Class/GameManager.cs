@@ -6,7 +6,7 @@ public class GameManager
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
 
-    private Round NewRound { get; set; }
+    private Battle NewBattle { get; set; }
 
     public GameManager()
     {
@@ -38,8 +38,8 @@ public class GameManager
 
     public void Start()
     {
-        NewRound = new Round(Heroes, Monsters);
+        NewBattle = new Battle(Heroes, Monsters);
 
-        NewRound.Start();
+        NewBattle.Start();
     }
 }
