@@ -2,7 +2,7 @@
 
 public class Skeleton : CharacterBase
 {
-    public Skeleton() : base("Skeleton", "Bone Crunch")
+    public Skeleton() : base("Skeleton", new AttackType("Bone Crunch", 1), 5)
     {
     }
 }

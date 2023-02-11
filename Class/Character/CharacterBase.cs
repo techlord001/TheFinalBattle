@@ -5,12 +5,16 @@ namespace TheFinalBattle.Class.Character
     public abstract class CharacterBase
     {
         public string Name { get; set; }
-        private string AttackName { get; }
+        private AttackType AttackType { get; }
+        public int MaxHP { get; set; }
+        public int CurrentHP { get; set; }
 
-        public CharacterBase(string name, string attack)
+        public CharacterBase(string name, AttackType attackType, int maxHP)
         {
             Name = name;
-            AttackName = attack;
+            AttackType = attackType;
+            MaxHP = maxHP;
+            CurrentHP = maxHP;
         }
 
         public void PlayerAction(Player player, PartyBase enemyParty)
@@ -27,12 +31,12 @@ namespace TheFinalBattle.Class.Character
                 switch ((PlayerAction)Convert.ToInt32(Console.ReadLine()) - 1)
                 {
                     case Character.PlayerAction.Attack:
-                        Action.Attack(Name, AttackName, enemyParty.Selection().Name);
-                        Thread.Sleep(500);
+                        Action.Attack(Name, AttackType, enemyParty.Selection());
+                        Thread.Sleep(1000);
                         break;
                     case Character.PlayerAction.Nothing:
                         Action.Nothing(Name);
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                         break;
                     default:
                         break;
@@ -43,17 +47,17 @@ namespace TheFinalBattle.Class.Character
                 Random random = new Random();
 
                 Console.WriteLine("Calculating move...");
-                Thread.Sleep(500);
+                Thread.Sleep(1000);
 
                 switch ((PlayerAction)random.Next(Enum.GetNames(typeof(PlayerAction)).Length))
                 {
                     case Character.PlayerAction.Attack:
-                        Action.Attack(Name, AttackName, enemyParty.Characters[random.Next(enemyParty.Characters.Count)].Name);
-                        Thread.Sleep(500);
+                        Action.Attack(Name, AttackType, enemyParty.Characters[random.Next(enemyParty.Characters.Count)]);
+                        Thread.Sleep(1000);
                         break;
                     case Character.PlayerAction.Nothing:
                         Action.Nothing(Name);
-                        Thread.Sleep(500);
+                        Thread.Sleep(1000);
                         break;
                     default:
                         break;

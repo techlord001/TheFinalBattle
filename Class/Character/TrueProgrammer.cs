@@ -2,7 +2,7 @@
 
 public class TrueProgrammer : CharacterBase
 {
-    public TrueProgrammer() : base("True Programmer", "Punch")
+    public TrueProgrammer() : base("True Programmer", new AttackType("Punch", 1), 25)
     {
     }
 
