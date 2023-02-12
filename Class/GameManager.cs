@@ -1,7 +1,4 @@
-﻿using TheFinalBattle.Class.Character;
-using TheFinalBattle.Class.Party;
-
-public class GameManager
+﻿public class GameManager
 {
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
@@ -41,13 +38,15 @@ public class GameManager
     {
         if (Heroes.Characters.Count == 0)
         {
-            Console.WriteLine("All the heroes have been defeated. All hope is lost! The Uncoded One & his forces have prevailed!");
+            string loseMessage = "All the heroes have been defeated. All hope is lost! The Uncoded One & his forces have prevailed!";
+            Message.WriteLine(loseMessage, ConsoleColor.DarkRed);
             return true;
         }
 
         if (Monsters.Characters.Count == 0 && currentRound == totalRounds)
         {
-            Console.WriteLine($"The Uncoded One and his minions have been defeated! You, {Heroes.Characters[0].Name.ToUpper()} have won the day and saved these realms! You are the True Programmer of legend!");
+            string winMessage = $"The Uncoded One and his minions have been defeated! You, {Heroes.Characters[0].Name.ToUpper()} have won the day and saved these realms! You are the True Programmer of legend!";
+            Message.WriteLine(winMessage, ConsoleColor.Cyan);
             return true;
         }
 

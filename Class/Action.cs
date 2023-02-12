@@ -6,23 +6,29 @@ public static class Action
     {
         int attackDamage = attackType.Name == "Bone Crunch" || attackType.Name == "Unraveling" ? new Random().Next(0, attackType.AttackDamage + 1) : attackType.AttackDamage;
 
-        Console.WriteLine($"{name.ToUpper()} used {attackType.Name.ToUpper()} on {enemy.Name.ToUpper()}.");
-        Console.WriteLine($"{attackType.Name.ToUpper()} dealt {attackDamage} damage to {enemy.Name.ToUpper()}.");
-
-        if (enemy.CurrentHP == 0)
-        {
-            Console.WriteLine($"{enemy.Name.ToUpper()} is already at {enemy.CurrentHP}/{enemy.MaxHP} HP.");
-            return;
-        }
+        Message.Write($"{name.ToUpper()} used {attackType.Name.ToUpper()} on {enemy.Name.ToUpper()}.", ConsoleColor.White);
+        Message.WriteLine($"{attackType.Name.ToUpper()} dealt {attackDamage} damage to {enemy.Name.ToUpper()}.", ConsoleColor.White);
 
         enemy.CurrentHP = enemy.CurrentHP - attackDamage;
 
-        Console.WriteLine($"{enemy.Name.ToUpper()} is now at {enemy.CurrentHP}/{enemy.MaxHP} HP.");
+        if (enemy.CurrentHP < 0)
+        {
+            enemy.CurrentHP = 0;
+        }
+
+        if (enemy.CurrentHP <= 2)
+        {
+            Message.WriteLine($"{enemy.Name.ToUpper()} is now at {enemy.CurrentHP}/{enemy.MaxHP} HP.", ConsoleColor.Red);
+        }
+        else
+        {
+            Message.WriteLine($"{enemy.Name.ToUpper()} is now at {enemy.CurrentHP}/{enemy.MaxHP} HP.", ConsoleColor.Green);
+        }
     }
 
     public static void Nothing(string name)
     {
-        Console.WriteLine($"{name.ToUpper()} did NOTHING.");
+        Message.WriteLine($"{name.ToUpper()} did NOTHING.", ConsoleColor.DarkGray);
     }
 }
 

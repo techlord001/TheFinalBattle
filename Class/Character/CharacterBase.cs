@@ -1,4 +1,5 @@
 ﻿using TheFinalBattle.Class.Party;
+using Utilities;
 
 namespace TheFinalBattle.Class.Character
 {
@@ -19,8 +20,7 @@ namespace TheFinalBattle.Class.Character
 
         public void PlayerAction(Player player, PartyBase enemyParty)
         {
-            Console.WriteLine($"It's {Name.ToUpper()}'s turn...");
-            Console.WriteLine("");
+            Message.WriteLine($"It's {Name.ToUpper()}'s turn...", ConsoleColor.Blue);
 
             if (player == Player.Human)
             {
@@ -35,11 +35,9 @@ namespace TheFinalBattle.Class.Character
                 {
                     case Character.PlayerAction.Attack:
                         Action.Attack(Name, AttackType, enemyParty.Selection());
-                        Thread.Sleep(1000);
                         break;
                     case Character.PlayerAction.Nothing:
                         Action.Nothing(Name);
-                        Thread.Sleep(1000);
                         break;
                     default:
                         break;
@@ -49,18 +47,15 @@ namespace TheFinalBattle.Class.Character
             {
                 Random random = new Random();
 
-                Console.WriteLine("Calculating move...");
-                Thread.Sleep(1000);
+                Message.WriteLine("Calculating move...", ConsoleColor.Yellow);
 
                 switch ((PlayerAction)random.Next(Enum.GetNames(typeof(PlayerAction)).Length))
                 {
                     case Character.PlayerAction.Attack:
                         Action.Attack(Name, AttackType, enemyParty.Characters[random.Next(enemyParty.Characters.Count)]);
-                        Thread.Sleep(1000);
                         break;
                     case Character.PlayerAction.Nothing:
                         Action.Nothing(Name);
-                        Thread.Sleep(1000);
                         break;
                     default:
                         break;

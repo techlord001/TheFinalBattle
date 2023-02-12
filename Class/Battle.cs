@@ -1,7 +1,4 @@
-﻿using TheFinalBattle.Class.Character;
-using TheFinalBattle.Class.Party;
-
-public class Battle
+﻿public class Battle
 {
     private Heroes Heroes { get; set; }
     private Monsters Monsters { get; set; }
@@ -17,21 +14,17 @@ public class Battle
     {
         for (int i = 0; i < party.Characters.Count; i++)
         {
-            if (party.Characters[i]
-                .CurrentHP == 0)
+            if (party.Characters[i].CurrentHP == 0)
             {
-                Console.WriteLine($"{party.Characters[i].Name.ToUpper()} has been defeated!");
+                Message.WriteLine($"{party.Characters[i].Name.ToUpper()} has been defeated!", ConsoleColor.Magenta);
                 party.Characters.Remove(party.Characters[i]);
             }
         }
     }
 
-    public bool End() => Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0 ? true : false;
-
     public bool Start()
     {
-        Console.WriteLine("A new battle begins! Prepare yourself...");
-        Thread.Sleep(1000);
+        Message.WriteLine("A new battle begins! Prepare yourself...", ConsoleColor.White);
 
         while (!BattleOver)
         {
@@ -47,7 +40,7 @@ public class Battle
                 EnemyHealthCheck(Heroes);
             }
 
-            BattleOver = End();
+            BattleOver = Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0 ? true : false;
         }
 
         return false;
