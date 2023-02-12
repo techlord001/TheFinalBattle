@@ -1,6 +1,4 @@
-﻿using TheFinalBattle.Class.Party;
-
-public class Heroes : PartyBase
+﻿public class Heroes : PartyBase
 {
     public void AddTrueProgrammer()
     {

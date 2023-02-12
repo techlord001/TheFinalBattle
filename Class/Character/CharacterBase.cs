@@ -6,14 +6,26 @@ namespace TheFinalBattle.Class.Character
     public abstract class CharacterBase
     {
         public string Name { get; set; }
-        public AttackType AttackType { get; }
+        public AttackType StandardAttack { get; }
         public int MaxHP { get; set; }
-        public int CurrentHP { get; set; }
 
-        public CharacterBase(string name, AttackType attackType, int maxHP)
+        private int _currentHP;
+        public int CurrentHP 
+        {
+            get => _currentHP; 
+            set => _currentHP = Math.Clamp(value, 0, MaxHP);
+        }
+
+        /// <summary>
+        /// The class from which all other characters derive, requires 3 params for its constructor
+        /// </summary>
+        /// <param name="name"></param>
+        /// <param name="attackType"></param>
+        /// <param name="maxHP"></param>
+        public CharacterBase(string name, AttackType standardAttack, int maxHP)
         {
             Name = name;
-            AttackType = attackType;
+            StandardAttack = standardAttack;
             MaxHP = maxHP;
             CurrentHP = maxHP;
         }

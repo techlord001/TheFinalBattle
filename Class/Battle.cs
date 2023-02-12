@@ -40,7 +40,7 @@
                 EnemyHealthCheck(Heroes);
             }
 
-            BattleOver = Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0 ? true : false;
+            BattleOver = Heroes.Characters.Count == 0 || Monsters.Characters.Count == 0;
         }
 
         return false;
