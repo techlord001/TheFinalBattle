@@ -1,6 +1,4 @@
-﻿using TheFinalBattle.Class.Character;
-
-public static class Action
+﻿public static class Action
 {
     public static void Attack(CharacterBase character, CharacterBase enemy)
     {
