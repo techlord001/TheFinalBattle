@@ -6,7 +6,7 @@ namespace TheFinalBattle.Class.Character
     public abstract class CharacterBase
     {
         public string Name { get; set; }
-        private AttackType AttackType { get; }
+        public AttackType AttackType { get; }
         public int MaxHP { get; set; }
         public int CurrentHP { get; set; }
 
@@ -34,10 +34,10 @@ namespace TheFinalBattle.Class.Character
                 switch ((PlayerAction)Convert.ToInt32(Console.ReadLine()) - 1)
                 {
                     case Character.PlayerAction.Attack:
-                        Action.Attack(Name, AttackType, enemyParty.Selection());
+                        Action.Attack(this, enemyParty.Selection());
                         break;
                     case Character.PlayerAction.Nothing:
-                        Action.Nothing(Name);
+                        Action.Nothing(this);
                         break;
                     default:
                         break;
@@ -52,10 +52,10 @@ namespace TheFinalBattle.Class.Character
                 switch ((PlayerAction)random.Next(Enum.GetNames(typeof(PlayerAction)).Length))
                 {
                     case Character.PlayerAction.Attack:
-                        Action.Attack(Name, AttackType, enemyParty.Characters[random.Next(enemyParty.Characters.Count)]);
+                        Action.Attack(this, enemyParty.Characters[random.Next(enemyParty.Characters.Count)]);
                         break;
                     case Character.PlayerAction.Nothing:
-                        Action.Nothing(Name);
+                        Action.Nothing(this);
                         break;
                     default:
                         break;

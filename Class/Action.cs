@@ -2,12 +2,13 @@
 
 public static class Action
 {
-    public static void Attack(string name, AttackType attackType, CharacterBase enemy)
+    public static void Attack(CharacterBase character, CharacterBase enemy)
     {
-        int attackDamage = attackType.Name == "Bone Crunch" || attackType.Name == "Unraveling" ? new Random().Next(0, attackType.AttackDamage + 1) : attackType.AttackDamage;
+        int attackDamage = character.AttackType.Name == "Bone Crunch" || character.AttackType.Name == "Unraveling" 
+            ? new Random().Next(0, character.AttackType.AttackDamage + 1) : character.AttackType.AttackDamage;
 
-        Message.Write($"{name.ToUpper()} used {attackType.Name.ToUpper()} on {enemy.Name.ToUpper()}.", ConsoleColor.White);
-        Message.WriteLine($"{attackType.Name.ToUpper()} dealt {attackDamage} damage to {enemy.Name.ToUpper()}.", ConsoleColor.White);
+        Message.Write($"{character.Name.ToUpper()} used {character.AttackType.Name.ToUpper()} on {enemy.Name.ToUpper()}.", ConsoleColor.White);
+        Message.WriteLine($"{character.AttackType.Name.ToUpper()} dealt {attackDamage} damage to {enemy.Name.ToUpper()}.", ConsoleColor.White);
 
         enemy.CurrentHP = enemy.CurrentHP - attackDamage;
 
@@ -26,9 +27,9 @@ public static class Action
         }
     }
 
-    public static void Nothing(string name)
+    public static void Nothing(CharacterBase character)
     {
-        Message.WriteLine($"{name.ToUpper()} did NOTHING.", ConsoleColor.DarkGray);
+        Message.WriteLine($"{character.Name.ToUpper()} did NOTHING.", ConsoleColor.DarkGray);
     }
 }
 
