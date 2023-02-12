@@ -8,7 +8,7 @@ public class GameManager
 
     private Battle? NewBattle { get; set; }
 
-    private int totalRounds = 2;
+    private int totalRounds = 3;
     private int currentRound = 0;
 
     public GameManager()
@@ -60,9 +60,18 @@ public class GameManager
         {
             currentRound++;
 
-            for (int j = 0; j < currentRound; j++)
+            if (currentRound == 1)
             {
                 Monsters.Add(new Skeleton());
+            }
+            else if (currentRound == 2)
+            {
+                Monsters.Add(new Skeleton());
+                Monsters.Add(new Skeleton());
+            }
+            else if (currentRound == 3)
+            {
+                Monsters.Add(new UncodedOne());
             }
 
             NewBattle = new Battle(Heroes, Monsters);
