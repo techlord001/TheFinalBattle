@@ -19,6 +19,9 @@ namespace TheFinalBattle.Class.Character
 
         public void PlayerAction(Player player, PartyBase enemyParty)
         {
+            Console.WriteLine($"It's {Name.ToUpper()}'s turn...");
+            Console.WriteLine("");
+
             if (player == Player.Human)
             {
                 Console.WriteLine("Enter a number to perform one of the following options: ");
