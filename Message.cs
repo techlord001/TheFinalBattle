@@ -2,7 +2,7 @@
 {
     public static class Message
     {
-        public static void WriteLine(string message, ConsoleColor consoleColor)
+        public static void WriteLine(string message, ConsoleColor consoleColor = ConsoleColor.Gray)
         {
             Console.ForegroundColor = consoleColor;
             Console.WriteLine(message);
@@ -11,7 +11,7 @@
             Thread.Sleep(1000);
         }
 
-        public static void Write(string message, ConsoleColor consoleColor)
+        public static void Write(string message, ConsoleColor consoleColor = ConsoleColor.Gray)
         {
             Console.ForegroundColor = consoleColor;
             Console.Write(message);
