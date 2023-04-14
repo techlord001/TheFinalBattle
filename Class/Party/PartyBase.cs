@@ -5,11 +5,13 @@ namespace TheFinalBattle.Class.Party
     public class PartyBase
     {
         public List<CharacterBase> Characters { get; private set; }
+        public List<Item> Inventory { get; private set; }
         public Player Player { get; set; }
 
         public PartyBase()
         {
             Characters = new List<CharacterBase>();
+            Inventory = new List<Item>();
         }
 
         public void Add(params CharacterBase[] characters)

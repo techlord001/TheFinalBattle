@@ -64,14 +64,14 @@
             for (int i = 0; i < Heroes.Characters.Count; i++)
             {
                 Status(Heroes.Characters[i]);
-                Heroes.Characters[i].PlayerAction(Heroes.Player, Monsters);
+                Heroes.Characters[i].PlayerAction(Heroes, Monsters);
                 EnemyHealthCheck(Monsters);
             }
 
             for (int i = 0; i < Monsters.Characters.Count; i++)
             {
                 Status(Monsters.Characters[i]);
-                Monsters.Characters[i].PlayerAction(Monsters.Player, Heroes);
+                Monsters.Characters[i].PlayerAction(Monsters, Heroes);
                 EnemyHealthCheck(Heroes);
             }
 
